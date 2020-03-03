@@ -13,14 +13,26 @@ public class Movement : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 startPosition;
     private bool dead = false;
+
+    private GameObject floor;
+    private GameObject[] beams;
+
     void Start()
     {
+        beams = GameObject.FindGameObjectsWithTag("pretty");
+        floor = GameObject.Find("Cube (1)");
         characterController = GetComponent<CharacterController>();
         startPosition = new Vector3(11.5f, 3.06f, 0.46f);
     }
 
     void Update()
     {
+
+        foreach(var obj in beams)
+        {
+            obj.transform.LookAt(new Vector3(transform.position.x, transform.position.y-1.5f, transform.position.z));
+        }
+
         if (characterController.isGrounded)
         {
             // We are grounded, so recalculate
@@ -44,6 +56,9 @@ public class Movement : MonoBehaviour
         if (!dead)
         {
             characterController.Move(moveDirection * Time.deltaTime);
+            ////Random shit
+            //floor.transform.position = new Vector3(transform.position.x-2, 1, transform.position.z-2);
+            //floor.transform.localScale = new Vector3(transform.position.x, 0, transform.position.z);
         }
 
     }
