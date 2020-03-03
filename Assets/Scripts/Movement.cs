@@ -48,6 +48,7 @@ public class Movement : MonoBehaviour
 
     }
 
+    //Resetting player to start position when the fall off of a platform.
     private void OnTriggerEnter(Collider other)
     {
         dead = true;
