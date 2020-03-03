@@ -11,10 +11,12 @@ public class Movement : MonoBehaviour
     public float gravity = 20.0f;
 
     private Vector3 moveDirection = Vector3.zero;
-
+    private Vector3 startPosition;
+    private bool dead = false;
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        startPosition = new Vector3(11.5f, 3.06f, 0.46f);
     }
 
     void Update()
@@ -39,6 +41,20 @@ public class Movement : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
 
         // Move the controller
-        characterController.Move(moveDirection * Time.deltaTime);
+        if (!dead)
+        {
+            characterController.Move(moveDirection * Time.deltaTime);
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        dead = true;
+        transform.position = startPosition;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        dead = false;
     }
 }
