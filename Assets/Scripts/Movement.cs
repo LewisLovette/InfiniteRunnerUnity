@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         beams = GameObject.FindGameObjectsWithTag("pretty");
-        floor = GameObject.Find("Cube (1)");
+        floor = GameObject.Find("floor");
         characterController = GetComponent<CharacterController>();
         startPosition = new Vector3(11.5f, 3.06f, 0.46f);
     }
@@ -57,7 +57,10 @@ public class Movement : MonoBehaviour
         {
             characterController.Move(moveDirection * Time.deltaTime);
             ////Random shit
-            //floor.transform.position = new Vector3(transform.position.x-2, 1, transform.position.z-2);
+            
+            floor.transform.localScale = new Vector3(2, 1, -(transform.position.z+1.5f));
+            floor.transform.position = new Vector3(11, 1, 0);
+            //floor.transform.position = new Vector3(transform.position.x, 1, transform.position.z-2);
             //floor.transform.localScale = new Vector3(transform.position.x, 0, transform.position.z);
         }
 
