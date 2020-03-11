@@ -10,6 +10,8 @@ public class Movement : MonoBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
 
+    private float platDistance = 0;
+
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 startPosition;
     private bool dead = false;
@@ -27,6 +29,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        if (transform.position.z > platDistance) platDistance = Mathf.Abs(transform.position.z);
 
         foreach(var obj in beams)
         {
@@ -56,10 +59,11 @@ public class Movement : MonoBehaviour
         if (!dead)
         {
             characterController.Move(moveDirection * Time.deltaTime);
-            ////Random shit
             
-            floor.transform.localScale = new Vector3(2, 1, -(transform.position.z+1.5f));
+            if(transform.position.z > platDistance) floor.transform.localScale = new Vector3(2, 1, -(transform.position.z+1.5f));
             floor.transform.position = new Vector3(11, 1, 0);
+            
+            ////Random shit
             //floor.transform.position = new Vector3(transform.position.x, 1, transform.position.z-2);
             //floor.transform.localScale = new Vector3(transform.position.x, 0, transform.position.z);
         }
