@@ -25,6 +25,8 @@ public class Movement : MonoBehaviour
         floor = GameObject.Find("floor");
         characterController = GetComponent<CharacterController>();
         startPosition = new Vector3(11.5f, 3.06f, 0.46f);
+        floor.transform.localScale = new Vector3(2, 1, -(transform.position.z + 1.5f));
+
     }
 
     void Update()
