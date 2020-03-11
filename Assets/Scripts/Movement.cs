@@ -29,6 +29,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        //so platform only gets longer.
         if (transform.position.z > platDistance) platDistance = Mathf.Abs(transform.position.z);
 
         foreach(var obj in beams)
@@ -60,6 +61,7 @@ public class Movement : MonoBehaviour
         {
             characterController.Move(moveDirection * Time.deltaTime);
             
+            //change distance of platform based on player position - note that platform will never get smaller
             if(transform.position.z > platDistance) floor.transform.localScale = new Vector3(2, 1, -(transform.position.z+1.5f));
             floor.transform.position = new Vector3(11, 1, 0);
             
