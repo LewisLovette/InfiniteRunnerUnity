@@ -22,20 +22,22 @@ public class Movement : MonoBehaviour
     private GameObject[] beams;
 
     //holds all floors and keeps track of current
-    private GameObject[] current;
+    private Queue<GameObject> current;
 
     void Start()
     {
         beams = GameObject.FindGameObjectsWithTag("pretty");
-        current = GameObject.FindGameObjectsWithTag("floor");
+        current.Enqueue(GameObject.Find("floor"));
+        current.Enqueue(GameObject.Find("floor (1)"));
+        current.Enqueue(GameObject.Find("floor (1)"));
 
         characterController = GetComponent<CharacterController>();
         startPosition = new Vector3(0, 2.5f, 0);
 
         //Spawn platform underneath player 
         //TODO: (currently hard-coded)
-        current[1].transform.localScale = new Vector3(2, 1, -(transform.position.z + 1.5f));
-        current[1].transform.position = new Vector3(-1, 1, 0);
+        current.Peek().transform.localScale = new Vector3(2, 1, -(transform.position.z + 1.5f));
+        current.Peek().transform.position = new Vector3(-1, 1, 0);
 
     }
 
@@ -77,7 +79,10 @@ public class Movement : MonoBehaviour
             if(transform.position.z > (distance * 1.5))
             {
                 distance++;
-                current[1].transform.position = new Vector3(-1, 1, (float)(distance * 1.5)-0.5f);
+                GameObject oldFloor = current.Peek();
+                current.Peek().transform.position = new Vector3(-1, 1, (float)(distance * 1.5)-0.5f);
+                current.Dequeue();
+                current.Enqueue(oldFloor);
             }
 
             //change distance of platform based on player position - note that platform will never get smaller
