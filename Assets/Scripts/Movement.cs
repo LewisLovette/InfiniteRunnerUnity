@@ -20,16 +20,32 @@ public class Movement : MonoBehaviour
     private float distance = 1;
 
     private GameObject[] beams;
-
+    private GameObject[] floors;
     //holds all floors and keeps track of current
-    private Queue<GameObject> current;
+    private Queue<GameObject> current = new Queue<GameObject>();
 
     void Start()
     {
         beams = GameObject.FindGameObjectsWithTag("pretty");
-        current.Enqueue(GameObject.Find("floor"));
-        current.Enqueue(GameObject.Find("floor (1)"));
-        current.Enqueue(GameObject.Find("floor (1)"));
+        
+        //setting up quque for floor
+        floors = GameObject.FindGameObjectsWithTag("floor");
+        Debug.Log(floors[0].name + floors[2].name + floors[2].name);
+        foreach(var obj in floors)
+        {
+            current.Enqueue(obj);
+        }
+
+        //tempFloor = GameObject.Find("floor");
+        //current.Enqueue(tempFloor);
+
+        //tempFloor = GameObject.Find("floor (1)");
+        //current.Enqueue(tempFloor);
+
+        //tempFloor = GameObject.Find("floor (2)");
+        //current.Enqueue(tempFloor);
+
+        GameObject.Find("floor");
 
         characterController = GetComponent<CharacterController>();
         startPosition = new Vector3(0, 2.5f, 0);
