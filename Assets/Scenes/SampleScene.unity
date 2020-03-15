@@ -3549,7 +3549,7 @@ GameObject:
   - component: {fileID: 1847203208}
   m_Layer: 0
   m_Name: floor (2)
-  m_TagString: platform
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3859,7 +3859,7 @@ GameObject:
   - component: {fileID: 1929569242}
   m_Layer: 0
   m_Name: floor (1)
-  m_TagString: platform
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
