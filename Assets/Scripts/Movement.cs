@@ -16,6 +16,9 @@ public class Movement : MonoBehaviour
     private Vector3 startPosition;
     private bool dead = false;
 
+    //stores z val
+    private float distance = 1;
+
     private GameObject floor;
     private GameObject[] beams;
 
@@ -67,9 +70,16 @@ public class Movement : MonoBehaviour
         {
             characterController.Move(moveDirection * Time.deltaTime);
             
+            //go in steps of 1.5 on z axis
+            if(transform.position.z > (distance * 1.5))
+            {
+                distance++;
+                floor.transform.position = new Vector3(-1, 1, (float)(distance * 1.5));
+            }
+
             //change distance of platform based on player position - note that platform will never get smaller
-            if(transform.position.z > platDistance) floor.transform.localScale = new Vector3(2, 1, -(transform.position.z+1.5f));
-            floor.transform.position = new Vector3(-1, 1, 0);
+            //if(transform.position.z > platDistance) floor.transform.localScale = new Vector3(2, 1, -(transform.position.z+1.5f));
+            //floor.transform.position = new Vector3(-1, 1, 0);
 
             ////Random shit
             //floor.transform.position = new Vector3(transform.position.x, 1, transform.position.z-2);
