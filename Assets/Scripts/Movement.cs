@@ -17,8 +17,8 @@ public class Movement : MonoBehaviour
     private bool dead = false;
 
     //stores z val
-    private float distance = 1;
-
+    private int distance = 0;
+    private float zSize;
     private GameObject[] beams;
     private GameObject[] floors;
     //holds all floors and keeps track of current
@@ -35,6 +35,7 @@ public class Movement : MonoBehaviour
         {
             current.Enqueue(obj);
         }
+        zSize = Mathf.Abs(current.Peek().transform.localScale.z);
 
         //tempFloor = GameObject.Find("floor");
         //current.Enqueue(tempFloor);
@@ -92,11 +93,11 @@ public class Movement : MonoBehaviour
             characterController.Move(moveDirection * Time.deltaTime);
             
             //go in steps of 1.5 on z axis
-            if(transform.position.z > (distance * 1.5))
+            if(transform.position.z > (distance * zSize))
             {
                 distance++;
                 GameObject oldFloor = current.Peek();
-                current.Peek().transform.position = new Vector3(-1, 1, (float)(distance * 1.5)-0.5f);
+                oldFloor.transform.position = new Vector3(-1, 1, (float)(distance * 1.5));
                 current.Dequeue();
                 current.Enqueue(oldFloor);
             }
