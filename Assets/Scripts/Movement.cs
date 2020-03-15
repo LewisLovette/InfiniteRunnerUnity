@@ -53,7 +53,7 @@ public class Movement : MonoBehaviour
 
         //Spawn platform underneath player 
         //TODO: (currently hard-coded)
-        current.Peek().transform.localScale = new Vector3(2, 1, -(transform.position.z + 1.5f));
+        current.Peek().transform.localScale = new Vector3(2, 1, -(transform.position.z + zSize));
         current.Peek().transform.position = new Vector3(-1, 1, 0);
 
     }
@@ -91,13 +91,13 @@ public class Movement : MonoBehaviour
         if (!dead)
         {
             characterController.Move(moveDirection * Time.deltaTime);
-            
-            //go in steps of 1.5 on z axis
-            if(transform.position.z > (distance * zSize))
+
+            //go in steps of zSize on z axis
+            if (transform.position.z > (distance * zSize))
             {
                 distance++;
                 GameObject oldFloor = current.Peek();
-                oldFloor.transform.position = new Vector3(-1, 1, (float)(distance * 1.5));
+                oldFloor.transform.position = new Vector3(-1, 1, (float)(distance * zSize));
                 current.Dequeue();
                 current.Enqueue(oldFloor);
             }
