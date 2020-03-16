@@ -56,6 +56,11 @@ public class Movement : MonoBehaviour
         current.Peek().transform.localScale = new Vector3(2, 1, -(transform.position.z + zSize));
         current.Peek().transform.position = new Vector3(-1, 1, 0);
 
+        //So 1st platform doesn't move from under player.
+        GameObject temp = current.Peek();
+        current.Dequeue();
+        current.Enqueue(temp);
+
     }
 
     void Update()
