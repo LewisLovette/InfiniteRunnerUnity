@@ -18,18 +18,23 @@ public class Movement : MonoBehaviour
 
     //stores z val
     private int distance = 0;
+    private float obstacleAddLength = 0;
+    private bool isCurrentObstacle = false;
     private float zSize;
+    private readonly System.Random random = new System.Random();
     private GameObject[] beams;
     private GameObject[] floors;
+    private GameObject[] obstacles;
     //holds all floors and keeps track of current
     private Queue<GameObject> current = new Queue<GameObject>();
 
     void Start()
     {
         beams = GameObject.FindGameObjectsWithTag("pretty");
-        
         //setting up quque for floor
         floors = GameObject.FindGameObjectsWithTag("floor");
+        obstacles = GameObject.FindGameObjectsWithTag("obstacle");
+
         Debug.Log(floors[0].name + floors[2].name + floors[2].name);
         foreach(var obj in floors)
         {
@@ -98,13 +103,27 @@ public class Movement : MonoBehaviour
             characterController.Move(moveDirection * Time.deltaTime);
 
             //go in steps of zSize on z axis
-            if (transform.position.z > (distance * zSize))
+            if (transform.position.z > (distance * zSize) + obstacleAddLength && !isCurrentObstacle)
             {
                 distance++;
                 GameObject oldFloor = current.Peek();
-                oldFloor.transform.position = new Vector3(-1, 1, (float)(distance * zSize));
+                oldFloor.transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
                 current.Dequeue();
                 current.Enqueue(oldFloor);
+                int temp = random.Next(0, 100);
+                if(temp >= 50)
+                {
+                    isCurrentObstacle = true;
+                }
+
+            }
+            else if (transform.position.z > (distance * zSize) + obstacleAddLength && isCurrentObstacle)
+            {
+                isCurrentObstacle = false;
+                obstacles[0].transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
+                obstacleAddLength += obstacles[0].transform.localScale.x;
+                Debug.Log(obstacles[0].transform.localScale.x + " + " + obstacles[0].transform.localScale.y + " + " + obstacles[0].transform.localScale.z + ".");
+
             }
 
             //change distance of platform based on player position - note that platform will never get smaller
