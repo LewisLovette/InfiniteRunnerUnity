@@ -120,6 +120,7 @@ public class Movement : MonoBehaviour
             }
             else if (transform.position.z > (distance * zSize) + obstacleAddLength && isCurrentObstacle)
             {
+                distance++;
                 isCurrentObstacle = false;
                 obstacles[0].transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
                 obstacleSize = obstacles[0].GetComponent<MeshRenderer>();
