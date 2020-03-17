@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
     private GameObject[] beams;
     private GameObject[] floors;
     private GameObject[] obstacles;
+    private MeshRenderer obstacleSize;
     //holds all floors and keeps track of current
     private Queue<GameObject> current = new Queue<GameObject>();
 
@@ -121,9 +122,10 @@ public class Movement : MonoBehaviour
             {
                 isCurrentObstacle = false;
                 obstacles[0].transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
-                obstacleAddLength += obstacles[0].transform.localScale.x;
-                Debug.Log(obstacles[0].transform.localScale.x + " + " + obstacles[0].transform.localScale.y + " + " + obstacles[0].transform.localScale.z + ".");
-
+                obstacleSize = obstacles[0].GetComponent<MeshRenderer>();
+                obstacleAddLength += obstacleSize.bounds.size.z;
+                Debug.Log(obstacleSize.bounds.size.x + " + " + obstacleSize.bounds.size.y + " + " + obstacleSize.bounds.size.z + ".");
+                
             }
 
             //change distance of platform based on player position - note that platform will never get smaller
