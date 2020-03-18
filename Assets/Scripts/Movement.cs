@@ -122,9 +122,12 @@ public class Movement : MonoBehaviour
             {
                 distance++;
                 isCurrentObstacle = false;
-                obstacles[0].transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
-                obstacleSize = obstacles[0].GetComponent<MeshRenderer>();
-                obstacleAddLength += obstacleSize.bounds.size.z - zSize;
+                GameObject tempObstacle = obstacles[random.Next(0, obstacles.Length)];  //get a random obstacle
+
+                tempObstacle.transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
+                obstacleSize = tempObstacle.GetComponent<MeshRenderer>();
+                obstacleAddLength += obstacleSize.bounds.size.z - zSize;    //-zSize to stop gap forming after platform
+
                 Debug.Log(obstacleSize.bounds.size.x + " + " + obstacleSize.bounds.size.y + " + " + obstacleSize.bounds.size.z + ".");
                 
             }
