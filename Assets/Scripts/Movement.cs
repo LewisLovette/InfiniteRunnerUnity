@@ -124,7 +124,7 @@ public class Movement : MonoBehaviour
                 isCurrentObstacle = false;
                 obstacles[0].transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
                 obstacleSize = obstacles[0].GetComponent<MeshRenderer>();
-                obstacleAddLength += obstacleSize.bounds.size.z;
+                obstacleAddLength += obstacleSize.bounds.size.z - zSize;
                 Debug.Log(obstacleSize.bounds.size.x + " + " + obstacleSize.bounds.size.y + " + " + obstacleSize.bounds.size.z + ".");
                 
             }
