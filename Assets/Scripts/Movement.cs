@@ -120,6 +120,7 @@ public class Movement : MonoBehaviour
             }
             else if (transform.position.z > (distance * zSize) + obstacleAddLength && isCurrentObstacle)
             {
+                //TODO: don't have the same obstacle 2 times in a row.
                 distance++;
                 isCurrentObstacle = false;
                 GameObject tempObstacle = obstacles[random.Next(0, obstacles.Length)];  //get a random obstacle
