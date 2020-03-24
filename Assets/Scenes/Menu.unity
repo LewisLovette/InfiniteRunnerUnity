@@ -556,6 +556,7 @@ GameObject:
   - component: {fileID: 271242250}
   - component: {fileID: 271242249}
   - component: {fileID: 271242248}
+  - component: {fileID: 271242251}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -662,6 +663,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271242246}
   m_CullTransparentMesh: 0
+--- !u!114 &271242251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271242246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478c82d40347a8841be28b89dbfbb0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &324943606
 Mesh:
   m_ObjectHideFlags: 0
@@ -6601,5 +6614,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sphere
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9169736886890519507, guid: aa8886de99d22204fb2c1e7de154d6d2, type: 3}
+    - {fileID: 9169736886890519506, guid: aa8886de99d22204fb2c1e7de154d6d2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aa8886de99d22204fb2c1e7de154d6d2, type: 3}
