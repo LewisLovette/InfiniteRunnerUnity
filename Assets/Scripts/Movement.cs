@@ -148,9 +148,9 @@ public class Movement : MonoBehaviour
     //Resetting player to start position when the fall off of a platform.
     private void OnTriggerEnter(Collider other)
     {
-        dead = true;
-        transform.position = startPosition;
         SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        //dead = true;
+        //transform.position = startPosition;
     }
     private void OnTriggerExit(Collider other)
     {
