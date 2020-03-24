@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -149,6 +150,7 @@ public class Movement : MonoBehaviour
     {
         dead = true;
         transform.position = startPosition;
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
     private void OnTriggerExit(Collider other)
     {
