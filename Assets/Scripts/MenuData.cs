@@ -15,6 +15,7 @@ public class MenuData : MonoBehaviour
         data = GameObject.Find("Data").GetComponent<SaveData>();
         Text = GetComponent<Text>();
 
+
     }
 
 }
