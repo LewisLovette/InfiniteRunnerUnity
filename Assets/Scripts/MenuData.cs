@@ -15,7 +15,7 @@ public class MenuData : MonoBehaviour
         data = GameObject.Find("Data").GetComponent<SaveData>();
         score = GetComponent<Text>();
 
-        score.text = "High-Score: "+data.getHighScore();
+        score.text = "High-Score: "+data.getHighScore().ToString("F0");
     }
 
 }
