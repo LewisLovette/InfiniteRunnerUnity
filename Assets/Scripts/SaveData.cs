@@ -9,7 +9,7 @@ public class SaveData : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void awake()
+    void Awake()
     {
         //Dont destroy on scene load
         DontDestroyOnLoad(this.gameObject);
