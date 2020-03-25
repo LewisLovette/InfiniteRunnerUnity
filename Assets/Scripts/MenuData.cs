@@ -13,7 +13,7 @@ public class MenuData : MonoBehaviour
     void Start()
     {
         data = GameObject.Find("Data").GetComponent<SaveData>();
-        Text = GetComponent<Text>();
+        score = GetComponent<Text>();
 
 
     }
