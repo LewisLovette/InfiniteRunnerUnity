@@ -30,12 +30,18 @@ public class Movement : MonoBehaviour
     //holds all floors and keeps track of current
     private Queue<GameObject> current = new Queue<GameObject>();
 
+    //Persistent data
+    private SaveData data;
+
     void Start()
     {
         beams = GameObject.FindGameObjectsWithTag("pretty");
         //setting up quque for floor
         floors = GameObject.FindGameObjectsWithTag("floor");
         obstacles = GameObject.FindGameObjectsWithTag("obstacle");
+
+        data = GameObject.Find("Data").GetComponent<SaveData>();
+
 
         Debug.Log(floors[0].name + floors[2].name + floors[2].name);
         foreach(var obj in floors)
@@ -148,6 +154,8 @@ public class Movement : MonoBehaviour
     //Resetting player to start position when the fall off of a platform.
     private void OnTriggerEnter(Collider other)
     {
+        //Score is distance
+        data.setHighScore(transform.position.z);
         SceneManager.LoadScene("Menu", LoadSceneMode.Single);
         //dead = true;
         //transform.position = startPosition;
