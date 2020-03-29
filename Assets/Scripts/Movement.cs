@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Movement : MonoBehaviour
 {
@@ -30,6 +32,9 @@ public class Movement : MonoBehaviour
     //holds all floors and keeps track of current
     private Queue<GameObject> current = new Queue<GameObject>();
 
+    private TextMeshProUGUI textScore;
+    private float currentScore = 0;
+
     //Persistent data
     private SaveData data;
 
@@ -42,6 +47,7 @@ public class Movement : MonoBehaviour
 
         data = GameObject.Find("Data").GetComponent<SaveData>();
 
+        textScore = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
 
         Debug.Log(floors[0].name + floors[2].name + floors[2].name);
         foreach(var obj in floors)
@@ -78,6 +84,12 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        //Display current distance
+        if(transform.position.z > currentScore)
+        {
+            currentScore = transform.position.z;
+            textScore.text = "Distance: " + transform.position.z.ToString("F0");
+        }
         //so platform only gets longer.
         if (transform.position.z > platDistance) platDistance = Mathf.Abs(transform.position.z);
 
