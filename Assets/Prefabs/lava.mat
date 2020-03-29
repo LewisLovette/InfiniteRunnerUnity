@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: lava
-  m_Shader: {fileID: -6465566751694194690, guid: e41489665cd0b2541a619bb4d389dbdf,
+  m_Shader: {fileID: -6465566751694194690, guid: 9078098206320d1488507488323b3884,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -35,6 +35,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_132C60F8:
+        m_Texture: {fileID: 2800000, guid: 52b1957be6dfde74d867dac9bfdf62f1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_64F7E809:
+        m_Texture: {fileID: 2800000, guid: 6755fcf0003c8ec4b828897d2b2c09cb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -72,6 +80,24 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_2560D906: 0.3
+    - Vector1_2E6661E6: 3
+    - Vector1_3ED71A56: 0.16
+    - Vector1_5214E2BE: 0.1
+    - Vector1_7B9C2379: 0.2
+    - Vector1_88114E4A: 0.4
+    - Vector1_A0F0BBF5: 0.4
+    - Vector1_B70459B8: 1
+    - Vector1_BDCBE303: 0
+    - Vector1_C11943F1: -0.27
+    - Vector1_DEBF9F77: 0.4
+    - Vector1_E512B7AC: 1.7
+    - Vector1_E8E0DC8: 2
+    - Vector1_E97BF845: 0.1
+    - Vector1_ECBD0369: 0.1
+    - Vector1_EEB61C8: 0.1
+    - Vector1_F2179F34: 0.1
+    - Vector1_F4FD793F: 0.1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -94,6 +120,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_6D41895: {r: 0.4811321, g: 0.03177286, b: 0.03177286, a: 0}
+    - Color_B8D925A3: {r: 1, g: 0.5615011, b: 0, a: 0}
+    - Color_C0AA5855: {r: 0.8773585, g: 0.7104708, b: 0.19037017, a: 0}
+    - Color_D89EBD41: {r: 0.6886792, g: 0.44800073, b: 0.12344248, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
