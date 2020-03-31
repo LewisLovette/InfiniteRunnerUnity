@@ -29,6 +29,10 @@ public class Movement : MonoBehaviour
     private GameObject[] floors;
     private GameObject[] obstacles;
     private MeshRenderer obstacleSize;
+
+    //for temp floor
+    private GameObject newFloor;
+
     //holds all floors and keeps track of current
     private Queue<GameObject> current = new Queue<GameObject>();
 
@@ -126,10 +130,15 @@ public class Movement : MonoBehaviour
             if (transform.position.z > (distance * zSize) + obstacleAddLength && !isCurrentObstacle)
             {
                 distance++;
-                GameObject oldFloor = current.Peek();
-                oldFloor.transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
+                if(transform.position.z > 1.5)
+                {
+                    //current.Peek().transform.Rotate(newFloor.transform.position, Space.World);
+                    current.Peek().transform.Rotate(newFloor.transform.position, 5);
+                }
+                newFloor = current.Peek();
+                //newFloor.transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
                 current.Dequeue();
-                current.Enqueue(oldFloor);
+                current.Enqueue(newFloor);
                 int temp = random.Next(0, 100);
                 if(temp >= 50)
                 {
