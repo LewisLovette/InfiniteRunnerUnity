@@ -42,6 +42,9 @@ public class Movement : MonoBehaviour
     //Persistent data
     private SaveData data;
 
+    GameObject newFloor;
+    private bool movePlat = false;
+
     void Start()
     {
         beams = GameObject.FindGameObjectsWithTag("pretty");
@@ -84,6 +87,8 @@ public class Movement : MonoBehaviour
         current.Dequeue();
         current.Enqueue(temp);
 
+        newFloor = current.Peek();
+
     }
 
     void Update()
@@ -121,25 +126,49 @@ public class Movement : MonoBehaviour
         // as an acceleration (ms^-2)
         moveDirection.y -= gravity * Time.deltaTime;
 
+        if (movePlat)
+        {
+            newFloor.transform.position = Vector3.MoveTowards(newFloor.transform.position, new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength), 0.5f);
+        }
+
+        //Keep updating offset for platforms
+        Vector3 tempV3 = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
+
+        if (newFloor.transform.position == tempV3 && isCurrentObstacle)
+        {
+            movePlat = false;
+            isCurrentObstacle = false;
+            //increase offset by obstacle size
+            obstacleSize = newFloor.GetComponent<MeshRenderer>();
+            obstacleAddLength += obstacleSize.bounds.size.z - zSize;    //-zSize to stop gap forming after platform
+        }
+        else if (newFloor.transform.position == tempV3)
+        {
+            movePlat = false;
+        }
+        
+
+
         // Move the controller
         if (!dead)
         {
             characterController.Move(moveDirection * Time.deltaTime);
 
             //go in steps of zSize on z axis
-            if (transform.position.z > (distance * zSize) + obstacleAddLength && !isCurrentObstacle)
+            if (transform.position.z > (distance * zSize) + obstacleAddLength && !isCurrentObstacle && !movePlat)
             {
+
                 distance++;
-                if(transform.position.z > 3)
-                {
-                    //current.Peek().transform.Rotate(newFloor.transform.position, Space.World);
-                    
-                }
-                GameObject newFloor = current.Peek();
-                //newFloor.transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
+                newFloor = current.Peek();
+
+                //move platform above camera + setup to be moved down.
+                newFloor.transform.position = new Vector3(-1, 10, (float)(distance * zSize) + obstacleAddLength);
+                movePlat = true;
+
                 current.Dequeue();
                 current.Enqueue(newFloor);
                 int temp = random.Next(0, 100);
+
                 if(temp >= 50)
                 {
                     isCurrentObstacle = true;
@@ -149,19 +178,21 @@ public class Movement : MonoBehaviour
                 Debug.Log(oldFloor.name);
 
             }
-            else if (transform.position.z > (distance * zSize) + obstacleAddLength && isCurrentObstacle)
+            else if (transform.position.z > (distance * zSize) + obstacleAddLength && isCurrentObstacle && !movePlat)
             {
                 //TODO: don't have the same obstacle 2 times in a row.
                 distance++;
-                isCurrentObstacle = false;
-                GameObject tempObstacle = obstacles[random.Next(0, obstacles.Length)];  //get a random obstacle
 
-                tempObstacle.transform.position = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
-                obstacleSize = tempObstacle.GetComponent<MeshRenderer>();
-                obstacleAddLength += obstacleSize.bounds.size.z - zSize;    //-zSize to stop gap forming after platform
+                newFloor = obstacles[random.Next(0, obstacles.Length)];  //get a random obstacle
 
-                Debug.Log(obstacleSize.bounds.size.x + " + " + obstacleSize.bounds.size.y + " + " + obstacleSize.bounds.size.z + ".");
+                //move platform above camera + setup to be moved down.
+                newFloor.transform.position = new Vector3(-1, 10, (float)(distance * zSize) + obstacleAddLength);
+
+                movePlat = true;
+
                 
+
+                //Debug.Log(obstacleSize.bounds.size.x + " + " + obstacleSize.bounds.size.y + " + " + obstacleSize.bounds.size.z + ".");
             }
 
             //change distance of platform based on player position - note that platform will never get smaller
@@ -172,9 +203,6 @@ public class Movement : MonoBehaviour
             //floor.transform.position = new Vector3(transform.position.x, 1, transform.position.z-2);
             //floor.transform.localScale = new Vector3(transform.position.x, 0, transform.position.z);
         }
-
-
-        current.Peek().transform.Rotate(oldFloor.transform.position);
 
     }
 
