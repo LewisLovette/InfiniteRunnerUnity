@@ -43,6 +43,8 @@ public class Movement : MonoBehaviour
     private SaveData data;
 
     GameObject newFloor;
+    //So no duplicate obstacle (as it makes player fall)
+    GameObject oldObstacle;
     private bool movePlat = false;
 
     void Start()
@@ -88,6 +90,9 @@ public class Movement : MonoBehaviour
         current.Enqueue(temp);
 
         newFloor = current.Peek();
+
+        //Set to difficult obstacle - initiates non-duplicate obstacles.
+        oldObstacle = GameObject.Find("Obstacle 3");
 
     }
 
@@ -140,11 +145,13 @@ public class Movement : MonoBehaviour
         if (newFloor.transform.position == tempV3 && isCurrentObstacle)
         {
             movePlat = false;
-            Debug.Log("Obstacle in position: " + newFloor.name + "     isCurrentObstacle = " + isCurrentObstacle);
             isCurrentObstacle = false;
             //increase offset by obstacle size
             obstacleSize = newFloor.GetComponent<MeshRenderer>();
             obstacleAddLength += obstacleSize.bounds.size.z - zSize;    //-zSize to stop gap forming after platform
+
+            //so no duplicate floor
+            oldObstacle = newFloor;
         }
         else if (newFloor.transform.position == tempV3 && !isCurrentObstacle)
         {
@@ -190,7 +197,12 @@ public class Movement : MonoBehaviour
                 distance++;
 
                 newFloor = obstacles[random.Next(0, obstacles.Length)];  //get a random obstacle
-                Debug.Log("Obstacle: " + newFloor.name);
+
+                while(newFloor.name == oldObstacle.name)
+                {
+                    newFloor = obstacles[random.Next(0, obstacles.Length)];  //get a random obstacle
+                }
+
                 //move platform above camera + setup to be moved down.
                 newFloor.transform.position = new Vector3(-1, 10, (float)(distance * zSize) + obstacleAddLength);
 
