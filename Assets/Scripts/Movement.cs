@@ -126,10 +126,13 @@ public class Movement : MonoBehaviour
         // as an acceleration (ms^-2)
         moveDirection.y -= gravity * Time.deltaTime;
 
+
+        //Moving platforms
         if (movePlat)
         {
             newFloor.transform.position = Vector3.MoveTowards(newFloor.transform.position, new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength), 0.5f);
         }
+
 
         //Keep updating offset for platforms
         Vector3 tempV3 = new Vector3(-1, 1, (float)(distance * zSize) + obstacleAddLength);
@@ -137,22 +140,32 @@ public class Movement : MonoBehaviour
         if (newFloor.transform.position == tempV3 && isCurrentObstacle)
         {
             movePlat = false;
+            Debug.Log("Obstacle in position: " + newFloor.name + "     isCurrentObstacle = " + isCurrentObstacle);
             isCurrentObstacle = false;
             //increase offset by obstacle size
             obstacleSize = newFloor.GetComponent<MeshRenderer>();
             obstacleAddLength += obstacleSize.bounds.size.z - zSize;    //-zSize to stop gap forming after platform
         }
-        else if (newFloor.transform.position == tempV3)
+        else if (newFloor.transform.position == tempV3 && !isCurrentObstacle)
         {
             movePlat = false;
         }
         
 
-
         // Move the controller
         if (!dead)
         {
             characterController.Move(moveDirection * Time.deltaTime);
+
+            
+
+            if ((transform.position.z > (distance * zSize) + obstacleAddLength))
+            {
+                int temp = random.Next(0, 100);
+                // 1 in 3 chance for obstacle
+                isCurrentObstacle =  temp >= 66  ?  true : false;
+            }
+
 
             //go in steps of zSize on z axis
             if (transform.position.z > (distance * zSize) + obstacleAddLength && !isCurrentObstacle && !movePlat)
@@ -167,15 +180,8 @@ public class Movement : MonoBehaviour
 
                 current.Dequeue();
                 current.Enqueue(newFloor);
-                int temp = random.Next(0, 100);
-
-                if(temp >= 50)
-                {
-                    isCurrentObstacle = true;
-                }
-
+                
                 oldFloor = newFloor;
-                Debug.Log(oldFloor.name);
 
             }
             else if (transform.position.z > (distance * zSize) + obstacleAddLength && isCurrentObstacle && !movePlat)
@@ -184,13 +190,11 @@ public class Movement : MonoBehaviour
                 distance++;
 
                 newFloor = obstacles[random.Next(0, obstacles.Length)];  //get a random obstacle
-
+                Debug.Log("Obstacle: " + newFloor.name);
                 //move platform above camera + setup to be moved down.
                 newFloor.transform.position = new Vector3(-1, 10, (float)(distance * zSize) + obstacleAddLength);
 
                 movePlat = true;
-
-                
 
                 //Debug.Log(obstacleSize.bounds.size.x + " + " + obstacleSize.bounds.size.y + " + " + obstacleSize.bounds.size.z + ".");
             }
