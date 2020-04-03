@@ -793,7 +793,7 @@ Transform:
   m_GameObject: {fileID: 241152068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: 1, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: -2}
+  m_LocalScale: {x: 2, y: 1, z: -2.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -1266,7 +1266,7 @@ Transform:
   m_GameObject: {fileID: 397782365}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: 1, z: -11}
-  m_LocalScale: {x: 2, y: 1, z: -2}
+  m_LocalScale: {x: 2, y: 1, z: -2.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 15
@@ -8688,7 +8688,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36642
+  m_Name: pb_Mesh19042
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9680,7 +9680,7 @@ Transform:
   m_GameObject: {fileID: 1847203207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: 13.02, z: -12}
-  m_LocalScale: {x: 2, y: 1, z: -2}
+  m_LocalScale: {x: 2, y: 1, z: -2.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -9998,7 +9998,7 @@ Transform:
   m_GameObject: {fileID: 1929569241}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: 13, z: -12}
-  m_LocalScale: {x: 2, y: 1, z: -2}
+  m_LocalScale: {x: 2, y: 1, z: -2.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
