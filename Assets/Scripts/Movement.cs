@@ -148,7 +148,9 @@ public class Movement : MonoBehaviour
             isCurrentObstacle = false;
             //increase offset by obstacle size
             obstacleSize = newFloor.GetComponent<MeshRenderer>();
-            obstacleAddLength += obstacleSize.bounds.size.z - zSize;    //-zSize to stop gap forming after platform
+
+            //if the length of z is 'odd', don't offset by 'zSize'
+            obstacleAddLength += (obstacleSize.bounds.size.z % 2 < 1 ) ? obstacleSize.bounds.size.z - zSize : obstacleSize.bounds.size.z;    //-zSize to stop gap forming after platform
 
             //so no duplicate floor
             oldObstacle = newFloor;
